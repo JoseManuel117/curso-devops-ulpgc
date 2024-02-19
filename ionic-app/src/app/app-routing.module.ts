@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: 'review-edition',
     loadChildren: () => import('./pages/review-edition/review-edition.module').then( m => m.ReviewEditionPageModule)
-  }
+  },
 ];
 
 @NgModule({

@@ -26,4 +26,24 @@ public class BookService implements IBookService {
         return books.getContent();
     }
 
+
+    @Override
+    public void updateBook(Book book) {
+        bookRepository.save(book);
+    }
+
+    @Override
+    public Book createBook(Book book) {
+        return bookRepository.save(book);
+    }
+
+    @Override
+    public Book getBookById(Long id) {
+        return bookRepository.getReferenceById(id);
+    }
+
+    @Override
+    public void deleteBook(Long id) {
+        bookRepository.deleteById(id);
+    }
 }

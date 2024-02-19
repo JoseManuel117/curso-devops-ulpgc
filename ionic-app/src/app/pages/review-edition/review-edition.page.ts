@@ -74,6 +74,10 @@ export class ReviewEditionPage implements OnInit {
     }
   }
 
+  createBook(){
+    this.navController.navigateForward('/book-edition');
+  }
+
   delete() {
     if (!!this.review.id) {
       this.reviewService.deleteReview(this.review.id)
