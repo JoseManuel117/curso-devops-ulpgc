@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationExtras } from '@angular/router';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import { Book } from 'src/app/model/book';
 import { ReviewService } from 'src/app/services/review.service';
 import { Review } from '../../model/review';
@@ -25,7 +25,8 @@ export class ReviewEditionPage implements OnInit {
   constructor(private route: ActivatedRoute,
     private bookService: BookService,
     private reviewService: ReviewService,
-    private navController: NavController) { }
+    private navController: NavController,
+    private router: Router) { }
 
   ngOnInit() {
     // Obtenemos la lista de libros para cargar el atributo books que utilizará el componente ion-select 
@@ -74,8 +75,21 @@ export class ReviewEditionPage implements OnInit {
     }
   }
 
-  editbook(){
-    this.navController.navigateForward(['/book-edition']);
+  editbook(isEditing: boolean){
+    if (isEditing && this.bookId) {
+      const book = this.books.find(b => b.id === this.bookId);
+      if (book) {
+        console.log("HOLA");
+        console.log(book);
+        // Usar Angular Router para navegar con estado
+        const navigationExtras: NavigationExtras = {
+          state: { book: book }
+        };
+        this.router.navigate(['/book-edition'], navigationExtras);
+      }
+    } else {
+      this.router.navigate(['/book-edition']); // Usar Angular Router aquí también
+    }
   }
 
   delete() {

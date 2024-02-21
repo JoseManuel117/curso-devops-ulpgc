@@ -38,7 +38,7 @@ export class BookService {
     return this.http.put(environment.urlAPI + '/books/' + book.id, book);
   }
 
-  deleteReview(bookId: number) {
+  deleteBook(bookId: number) {
     return new Promise(resolve => {
       return this.http.delete(environment.urlAPI + '/books/' + bookId)
           .subscribe( (response) => {
