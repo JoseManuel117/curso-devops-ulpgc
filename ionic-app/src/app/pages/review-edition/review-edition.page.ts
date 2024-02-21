@@ -74,8 +74,8 @@ export class ReviewEditionPage implements OnInit {
     }
   }
 
-  createBook(){
-    this.navController.navigateForward('/book-edition');
+  editbook(){
+    this.navController.navigateForward(['/book-edition']);
   }
 
   delete() {

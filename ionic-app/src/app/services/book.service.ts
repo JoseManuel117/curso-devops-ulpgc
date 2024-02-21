@@ -27,11 +27,11 @@ export class BookService {
 
   createBook(book: Book) {
     return new Promise((resolve) => {
-      this.http.post<Book>(environment.urlAPI + '/books', book) 
-        .subscribe((response: Book) => { 
-          this.newBook.emit(response);
-          resolve(true);
-        });
+      this.http.post<Book>(environment.urlAPI + '/books', book)
+          .subscribe((response: Book) => {
+            this.newBook.emit(response);
+            resolve(true);
+          });
     });
   }
   updateBook(book: Book) {
@@ -41,10 +41,10 @@ export class BookService {
   deleteReview(bookId: number) {
     return new Promise(resolve => {
       return this.http.delete(environment.urlAPI + '/books/' + bookId)
-      .subscribe( (response) => {
-        this.deletedBook.emit(bookId);
-        resolve(true);
-      });
+          .subscribe( (response) => {
+            this.deletedBook.emit(bookId);
+            resolve(true);
+          });
     });
   }
 

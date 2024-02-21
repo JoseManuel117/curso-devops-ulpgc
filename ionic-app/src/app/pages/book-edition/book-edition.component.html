@@ -1,0 +1,73 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            Edición de Libro
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item>
+        <ion-label position="floating">Nombre del libro</ion-label>
+        <ion-input name="Título del libro"
+                   type="text"
+                   [(ngModel)]="book.name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Autor del Libro</ion-label>
+        <ion-input name="Nombre del Autor"
+                   type="text"
+                   [(ngModel)]="book.author"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Fecha de la reseña</ion-label>
+        <ion-input id="open-popover2" readonly value="{{publishDate | date: 'd MMM, yyyy'}}"></ion-input>
+    </ion-item>
+
+    <ion-popover trigger="open-popover2" cssClass="width-80">
+        <ng-template>
+            <ion-datetime
+                    name="created"
+                    presentation="date"
+                    [(ngModel)]="publishDate"
+                    size="cover"
+                    [showDefaultButtons]="true">
+            </ion-datetime>
+        </ng-template>
+    </ion-popover>
+
+    <ion-item>
+        <ion-label position="floating">ISBN</ion-label>
+        <ion-input name="ISBN"
+                   type="text"
+                   [(ngModel)]="book.isbn"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Editorial</ion-label>
+        <ion-input name="Editorial"
+                   type="text"
+                   [(ngModel)]="book.published"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Imagen</ion-label>
+        <ion-input name="Url de la Imagen"
+                   type="text"
+                   [(ngModel)]="book.cover"></ion-input>
+    </ion-item>
+
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+        <ion-button (click)="saveBook()">
+            GUARDAR
+        </ion-button>
+    </ion-fab>
+
+
+</ion-content>
+
