@@ -5,6 +5,7 @@ import { ReviewService } from 'src/app/services/review.service';
 import { Review } from '../../model/review';
 import { BookService } from '../../services/book.service';
 import { NavController } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-review-edition',
@@ -51,6 +52,7 @@ export class ReviewEditionPage implements OnInit {
   }
   
   saveChanges() {
+    console.log(environment.urlAPI)
     this.review.book = this.books.filter(book => book.id == this.bookId)[0];
     this.review.created = this.created;
 

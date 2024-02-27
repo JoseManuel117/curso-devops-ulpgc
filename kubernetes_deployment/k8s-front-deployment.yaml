@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bookreview-front
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      nodePort: 30080
+  selector:
+    app: bookreview-front
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookreview-front
+spec:
+  selector:
+    matchLabels:
+      app: bookreview-front
+  template:
+    metadata:
+      labels:
+        app: bookreview-front
+    spec:
+      containers:
+        - name: bookreview-front
+          image: josemanuel117/bookreview-front-k8s
+          ports:
+            - containerPort: 80

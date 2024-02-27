@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bookreview-back
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+  selector:
+    app: bookreview-back
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookreview-back
+spec:
+  selector:
+    matchLabels:
+      app: bookreview-back
+  template:
+    metadata:
+      labels:
+        app: bookreview-back
+    spec:
+      containers:
+        - name: bookreview-back
+          image: josemanuel117/bookreview-back-k8s
+          ports:
+            - containerPort: 8080

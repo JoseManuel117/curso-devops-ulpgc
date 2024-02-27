@@ -5,9 +5,8 @@
 export const environment = {
   production: false,
   //urlAPI: 'https://bookreview-back.wittysmoke-d4551057.westeurope.azurecontainerapps.io/' //
-  urlAPI: 'http://localhost:8080'
+  urlAPI: 'http://bookreview-back:8080'
 };
-
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

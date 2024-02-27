@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: bookreview-bdd-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bookreview-bdd
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5432
+  selector:
+    app: bookreview-bdd
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookreview-bdd
+spec:
+  selector:
+    matchLabels:
+      app: bookreview-bdd
+  template:
+    metadata:
+      labels:
+        app: bookreview-bdd
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15.1
+          env:
+            - name: POSTGRES_PASSWORD
+              value: "bookreview"
+            - name: POSTGRES_USER
+              value: "bookreview"
+            - name: POSTGRES_DB
+              value: "bookreview"
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: "/var/lib/postgresql/data"
+              name: bookreview-bdd-volume
+      volumes:
+        - name: bookreview-bdd-volume
+          persistentVolumeClaim:
+            claimName: bookreview-bdd-pvc
