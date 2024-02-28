@@ -50,7 +50,34 @@ spec:
           volumeMounts:
             - mountPath: "/var/lib/postgresql/data"
               name: bookreview-bdd-volume
+          livenessProbe:
+            exec:
+                command:
+                - pg_isready
+                - "-U"
+                - "bookreview"
+                - "-d"
+                - "bookreview"
+                - "-h"
+                - "localhost"
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+          readinessProbe:
+            exec:
+              command:
+              - pg_isready
+              - "-U"
+              - "bookreview"
+              - "-d"
+              - "bookreview"
+              - "-h"
+              - "localhost"
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
       volumes:
         - name: bookreview-bdd-volume
           persistentVolumeClaim:
             claimName: bookreview-bdd-pvc
+      

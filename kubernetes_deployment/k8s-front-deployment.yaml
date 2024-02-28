@@ -16,6 +16,7 @@ kind: Deployment
 metadata:
   name: bookreview-front
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: bookreview-front
@@ -29,3 +30,22 @@ spec:
           image: josemanuel117/bookreview-front-k8s
           ports:
             - containerPort: 80
+          env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 5
+
+            
