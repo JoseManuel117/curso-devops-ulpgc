@@ -5,6 +5,9 @@ import { ReviewService } from '../../services/review.service';
 import { Review } from 'src/app/model/review';
 import {  NavigationExtras } from '@angular/router';
 
+import { ConfigService } from '../../services/pod.service';
+
+
 @Component({
   selector: 'reviews-home',
   templateUrl: 'reviews.page.html',
@@ -14,7 +17,7 @@ export class ReviewsPage implements OnInit {
 
   @ViewChild(IonInfiniteScroll, { static: true })
   infiniteScroll?: IonInfiniteScroll;
-
+  podName: string = ''
   page = 0;
   size = 7;
 
@@ -22,11 +25,15 @@ export class ReviewsPage implements OnInit {
   avatarClasses = ['avatar-rojo', 'avatar-verde', 'avatar-azul-claro', 'avatar-azul-oscuro', 'avatar-violeta', 
                    'avatar-amarillo', 'avatar-rosa', 'avatar-naranja', 'avatar-turquesa', 'avatar-verde-limon'];
 
-  constructor(private reviewsService: ReviewService,
-              private navCtrl: NavController) {}
   
-
+  
+                   constructor(private reviewsService: ReviewService,
+              private navCtrl: NavController,
+              private configService: ConfigService) {}
+  
+              
   ngOnInit(): void {
+    this.podName = window['_env_']?.POD_NAME || 'Valor por defecto';
     this.loadReviews(false);
 
     // Nos suscribimos al evento de creación de reseñas para agregarla a la lista
