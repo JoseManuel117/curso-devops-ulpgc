@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   //urlAPI: 'https://bookreview-back.wittysmoke-d4551057.westeurope.azurecontainerapps.io/' //
   urlAPI: 'http://192.168.1.162:31151'
+  //urlAPI: 'http://bookreview-back:8080'
 };
 /*
  * For easier debugging in development mode, you can import the following file
