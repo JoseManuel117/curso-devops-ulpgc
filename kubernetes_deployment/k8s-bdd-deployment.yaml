@@ -8,6 +8,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
+  storageClassName: rook-cephfs
 
 ---
 apiVersion: v1
@@ -47,12 +48,17 @@ spec:
               value: "bookreview"
           ports:
             - containerPort: 5432
+          resources:
+            requests:
+              cpu: "250m"  # 250 milicores de CPU
+            limits:
+              cpu: "500m"  # 500 milicores de CPU
           volumeMounts:
             - mountPath: "/var/lib/postgresql/data"
               name: bookreview-bdd-volume
           livenessProbe:
             exec:
-                command:
+              command:
                 - pg_isready
                 - "-U"
                 - "bookreview"
@@ -66,13 +72,13 @@ spec:
           readinessProbe:
             exec:
               command:
-              - pg_isready
-              - "-U"
-              - "bookreview"
-              - "-d"
-              - "bookreview"
-              - "-h"
-              - "localhost"
+                - pg_isready
+                - "-U"
+                - "bookreview"
+                - "-d"
+                - "bookreview"
+                - "-h"
+                - "localhost"
             initialDelaySeconds: 5
             periodSeconds: 10
             timeoutSeconds: 5

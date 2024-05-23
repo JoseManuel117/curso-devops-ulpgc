@@ -15,7 +15,6 @@ kind: Deployment
 metadata:
   name: bookreview-back
 spec:
-  replicas: 3
   selector:
     matchLabels:
       app: bookreview-back
@@ -27,6 +26,11 @@ spec:
       containers:
         - name: bookreview-back
           image: josemanuel117/bookreview-back-k8s
+          resources:
+            requests:
+              cpu: "250m"  # 250 milicores de CPU
+            limits:
+              cpu: "500m"  # 500 milicores de CPU
           ports:
             - containerPort: 8080
           livenessProbe:
@@ -41,4 +45,3 @@ spec:
               port: 8080
             initialDelaySeconds: 60
             periodSeconds: 5
-

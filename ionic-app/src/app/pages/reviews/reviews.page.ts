@@ -6,6 +6,7 @@ import { Review } from 'src/app/model/review';
 import {  NavigationExtras } from '@angular/router';
 
 import { ConfigService } from '../../services/pod.service';
+import {environment} from "../../../environments/environment";
 
 
 @Component({
@@ -107,4 +108,6 @@ export class ReviewsPage implements OnInit {
    const i = index >= 10 ? index % 10 : index;
    return this.avatarClasses[i];
   }
+
+    protected readonly environment = environment;
 }
